@@ -1,0 +1,176 @@
+<div class="chart_container">
+
+    <h3>NASA Global Temp API with <span id="emphasis">Chart.js</span></h3>
+    <div style="width: 100%;">
+    <canvas id="chart" style="display: inline-block;"></canvas>
+    </div>
+
+    <script>    
+    chartIt();
+    async function chartIt() {
+
+        const data = await getData();
+        const data2 = await getData2();
+        const data3 = await getData3();
+        const ctx = document.getElementById('chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.xs,
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'hello',
+                            font: {
+                                size: 40,
+                                color: 'blue',
+                                family: 'tahoma',
+                                weight: 'normal',
+                                style: 'italic'
+                            }
+                        }
+                    }
+                },
+                datasets: [{
+                    label: 'Global Average Temperature',
+                    data: data.ys,
+                    fill: false,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                    },
+                    {
+                    label: 'Northern Hemisphere',
+                    data: data2.ys,
+                    fill: false,
+                    backgroundColor: 'rgba(132, 99, 255, 0.2)',
+                    borderColor: 'rgba(132, 99, 255, 1)',
+                    borderWidth: 1
+                    },
+                    {
+                    label: 'Southern Hemisphere',
+                    data: data3.ys,
+                    fill: false,
+                    backgroundColor: 'rgba(132, 255, 188, 0.2)',
+                    borderColor: 'rgba(132, 255, 188, 1)',
+                    borderWidth: 1
+                    }]
+            },
+                defaults: {
+                    options: {
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            // y-axis labels
+                            callback: function(value, index, values) {
+                                return value + ' C°';
+                            }
+                        }
+                    }]
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+
+                    title: {
+                        display: true,
+                        text: "chart title",
+                        font: {
+                            size: 40,
+                            color: 'blue',
+                            family: 'tahoma',
+                            weight: 'normal',
+                            style: 'italic'
+                        }
+                    },
+                    subtitle: {
+                        display: true,
+                        text: 'Chart Subtitle',
+                        color: 'blue',
+                        font: {
+                            size: 24,
+                            family: 'tahoma',
+                            weight: 'normal',
+                            style: 'italic'
+                        },
+                        padding: {
+                            top: 10,
+                        }
+                    }
+                }
+            }
+        });
+    
+        // Data from: https://data.giss.nasa.gov/gistemp/
+        // Mean from: https://earthobservatory.nasa.gov/world-of-
+
+        
+        
+        async function getData(){
+        const xs = [];
+        const ys = [];
+        const response = await fetch('csv_files/GLB.Ts+dSST.csv');
+        const data = await response.text();
+
+        const table = data.split('\n').slice(1);
+        table.forEach(row => {
+            const columns = row.split(',');
+            const year = columns[0];
+            xs.push(year);
+            const temp = columns[1];
+            ys.push(parseFloat(temp) + 14);
+            // console.log(year, temp);
+        });
+            return {xs, ys};
+        };
+
+        // DATASET  #2--Northern Hemisphere
+        async function getData2(){
+        const xs = [];
+        const ys = [];
+        const response = await fetch('csv_files/NH.Ts+dSST.csv');
+        const data2 = await response.text();
+
+        const table = data2.split('\n').slice(1);
+        table.forEach(row => {
+            const columns = row.split(',');
+            const year = columns[0];
+            xs.push(year);
+            const temp = columns[1];
+            ys.push(parseFloat(temp) + 14);
+            // console.log(year, temp);
+        });
+            return {xs, ys};
+        };
+
+        // DATASET  #3--Southern Hemisphere
+        async function getData3(){
+        const xs = [];
+        const ys = [];
+        const response = await fetch('csv_files/SH.Ts+dSST.csv');
+        const data3 = await response.text();
+
+        const table = data3.split('\n').slice(1);
+        table.forEach(row => {
+            const columns = row.split(',');
+            const year = columns[0];
+            xs.push(year);
+            const temp = columns[1];
+            ys.push(parseFloat(temp) + 14);
+            // console.log(year, temp);
+        });
+            return {xs, ys};
+        };
+    };
+    </script>
+</div>

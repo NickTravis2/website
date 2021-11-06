@@ -1,0 +1,84 @@
+<nav>
+    <div class="container" id="homeContainer">
+        <a href="/"><h3 class="logo">Web<span>Dev</span></h3></a>
+
+        <!-- REG/LOGIN BUTTONS -->
+        <div class="container-fluid" id="btnExample">
+            <div class="col-md-12" float="right">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                <!-- <span id="topBtnSpan"></span> -->
+                <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
+            </div>
+        </div>
+
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+        </div>
+        <div class="nav-list">
+            <ul>
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/aboutContainer">About</a></li>
+                <li><a href="/gallery">Work</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        
+    </div>
+
+            <!-- MOBILE FOOTER MENU -->
+                <!-- <div class="container" id="quickMenu"> -->
+    <div class="mobile-nav">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/aboutContainer">About</a></li>
+            <li><a href="/gallery">Work</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+        <div class="mobileLoginBtns">
+            <button class="btn-reg" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+            <button class="btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
+        </div>
+    </div>
+    
+</nav>
+
+
+
+    <!--MODAL DESIGN-->
+<div class="modal" id="registerModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registration Form</h5>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="userName" class="form-control" placeholder="Your Name"><br>
+                <input type="email" id="userEmail" class="form-control" placeholder="Your Email"><br>
+                <input type="password" id="userPassword" class="form-control" placeholder="Password"><br>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="registerBtn">Register</button>
+                <button class="btn btn-default" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="loginModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sign in</h5>
+            </div>
+            <div class="modal-body">
+                <!-- <input type="text" id="userName" class="form-control" placeholder="Your Name"><br> -->
+                <input type="email" id="userEmail" class="form-control" placeholder="Your Email"><br>
+                <input type="password" id="userPassword" class="form-control" placeholder="Password"><br>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="loginBtn">Sign In</button>
+                <button class="btn btn-default" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
